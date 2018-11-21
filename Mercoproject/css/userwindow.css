@@ -1,0 +1,156 @@
+::-webkit-input-placeholder {
+   font-style: italic;
+   font-size: 10px;
+}
+:-moz-placeholder {
+   font-style: italic;  
+}
+::-moz-placeholder {
+   font-style: italic;  
+}
+:-ms-input-placeholder {  
+   font-style: italic; 
+}
+
+.modalDialog {
+  position: fixed;
+  font-family: Arial, Helvetica, sans-serif;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(35, 53, 89, 0.8);
+  z-index: 99999;
+  opacity:1;
+  -webkit-transition: opacity 400ms ease-in;
+  -moz-transition: opacity 400ms ease-in;
+  transition: opacity 400ms ease-in;
+  pointer-events: auto;
+}
+
+
+.modalDialog > .host {
+  width: 600px;
+  position: relative;
+  margin: 10% auto;
+  padding: 10px 25px 13px 25px;
+  border-radius: 10px;
+  background: #FFFFFF;
+  height: 300px;
+}
+
+.host > .submithost {
+    height: auto;
+    position:absolute;
+    bottom: -8px;
+    width:100px;
+    color: #C4D2D2;
+    background-color: #514C49;
+    cursor: pointer;
+    border-radius: 10px;
+    right:42%;
+    font-size: 12px;
+}
+
+
+.modalDialog > .participants {
+  width: 400px;
+  position: relative;
+  margin: 10% auto;
+  padding: 10px 25px 13px 25px;
+  border-radius: 10px;
+  background: #FFFFFF;
+  height: 300px;
+}
+
+.participants > .submitparticipants {
+    height: auto;
+    position:absolute;
+    bottom: -8px;
+    width:100px;
+    color: #C4D2D2;
+    background-color: #514C49;
+    cursor: pointer;
+    border-radius: 10px;
+    right:38%;
+    font-size: 12px;
+}
+
+.close {
+  background: #606061;
+  color: #FFFFFF;
+  line-height: 25px;
+  position: absolute;
+  right: -12px;
+  text-align: center;
+  top: -10px;
+  width: 24px;
+  text-decoration: none;
+  font-weight: bold;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
+  -moz-box-shadow: 1px 1px 3px #000;
+  -webkit-box-shadow: 1px 1px 3px #000;
+  box-shadow: 1px 1px 3px #000;
+}
+
+.close:hover { background: #00d9ff; }
+
+.leftpanel{
+  float:left;
+  width: 50%;
+  margin-top: 15px;
+  padding-top: 5px;
+  height: 100%;
+}
+
+.rightpanel{
+  float:right;
+  width: 50%;
+  margin-top: 15px;
+  padding-top: 5px;
+  height: 100%;
+  text-align: center;
+}
+
+.centerpanel{
+  margin-top: 15px;
+  padding-top: 5px;
+  height: 100%;
+  text-align: center;
+}
+
+.btn-color-record-activate{
+  background-color: #33CA91;
+  color: #fff;
+  font-size: 12px;  
+}
+
+
+.select-style {
+    font-size: 12px;
+    margin: 2px 2px 2px 2px;
+    border: 1px solid #ccc;
+    width: 220px;
+    overflow: hidden;
+    background-color: #fff;
+    background: #fff url("http://www.scottgood.com/jsg/blog.nsf/images/arrowdown.gif") no-repeat 90% 50%;
+    display: inline-block;
+}
+
+.select-style select {
+    padding: 5px 8px;
+    width: 130%;
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+}
+
+.select-style select:focus {
+    outline: none;
+}

@@ -1,0 +1,220 @@
+input[type=number]{
+    width: 50px;
+} 
+
+.lobby-s{
+  color: #9C97A6; 
+  background-color: #0B132B; 
+  
+
+}
+.lobby{
+  width:100%;
+  height:100%;  
+  font-size: 16px;
+  font-family: 'Lato',sans-serif;
+  text-align: center;
+  
+}
+
+.title{ 
+  margin-top:60px;
+  letter-spacing: 0.1em;
+  font-size: 2.5em;  
+  margin-bottom: 40px;
+  color: #fff;
+}
+
+.lobby-form{
+  margin: 0 auto;
+  width: 50%;
+  text-align: left;
+}
+
+.input-field{
+  background-color: #9993A2;
+  color: #fff;
+  width: 90%;
+  border: 0;
+  border-radius: 5px;
+}
+
+
+.left-clock{
+  float:left;
+  margin-left: 30px;
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.right-input{
+  position: relative;
+  float:left;
+  top: 20px;
+  left: 40px;
+  font-size: 12px;
+}
+
+.plus-icon-color{
+  color:#EC932E;
+  cursor: pointer;
+}
+
+
+.time-container{
+  float: none;
+  width: 100%;
+  border: 1px solid #FDFCFD;
+  position: relative;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  vertical-align: middle;
+  text-align: center;
+  border-radius: 10px;
+  height:1%;
+}
+
+.time-container > .submit-1 {
+    width: 10%;
+    height: auto;
+    position:absolute;
+    bottom:-10px;
+    color: #fff;
+    background-color: #33CA91;
+    cursor: pointer;
+    right:45%;
+    border-radius: 10px;
+}
+
+#submit-time{
+  visibility: hidden;
+}
+
+.hide-container {
+  display: none;
+}
+
+.container-openning{
+  display: block;
+}
+
+#agenda-con{
+  width: 70%;
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
+
+
+.agenda-container{
+  float: none;
+  margin-top:40px;
+  width: 100%;
+  border: 1px solid #FDFCFD;
+  position: relative;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  vertical-align: middle;
+  text-align: center;
+  border-radius: 10px;
+  height:1%;
+}
+
+#submit-agenda{
+  visibility: hidden;
+}
+
+.agenda-container > .submit-2 {
+    width: 10%;
+    height: auto;
+    position:absolute;
+    bottom:-10px;
+    color: #fff;
+    background-color: #33CA91;
+    cursor: pointer;
+    right:45%;
+    border-radius: 10px;
+}
+
+.agendar-content{
+  margin-top: 10px;
+}
+
+.link-container {
+  position: :relative;
+  margin-top: 50px;
+  float: none;
+  width: 100%;
+  border: 1px solid #FDFCFD;
+  position: relative;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  height:1%;
+  vertical-align: middle;
+  top: 0;
+  border-radius: 10px;
+}
+
+.link-container > .addimg{
+  width: 10%;
+  height: auto;
+  position:absolute;
+  bottom:-10px;
+  cursor: pointer;
+  right:45%;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.fa-envelope-square{
+  color: #fff;
+}
+
+.link-container > .link-conatiner-t{
+  text-align: center;
+}
+
+.link-container > .link-container-c{
+  margin-left: 20px;
+  margin-right:20px;
+}
+
+.link-title{
+  margin-top:10px;
+}
+
+.link-content{
+  margin-bottom: 10px;
+}
+
+.link-content > .input-field1{
+  margin-top: 10px;
+  background-color: #0B132B;
+  width: 90%;
+  color: #9C97A6;
+  border: 1;
+}
+
+.link-container >.copylink {
+    width: 10%;
+    height: auto;
+    position:absolute;
+    bottom:-20px;
+    left:45%;
+    cursor: pointer;
+    margin:0 auto;
+    text-align: center;
+    z-index: 1;
+    color:#fff;
+}
+
+.copy-clipboard{
+  cursor: pointer;
+  color: #fff;
+}
+
+.icon-minus-sign{
+  color:red;
+  cursor: pointer;
+}
+
+

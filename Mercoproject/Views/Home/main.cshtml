@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<title>MERCO</title>
+		<meta name="description" content="Video conference websites for merco project" />
+		<meta name="keywords" content="merco, video confernce" />
+		<link rel="shortcut icon" href="../favicon.ico">
+		<link rel="stylesheet" type="text/css" href="../css/default.css" />
+		<link rel="stylesheet" type="text/css" href="../css/shapedbubble.css" />
+		<link rel="stylesheet" type="text/css" href="../css/component.css" />
+		<link rel="stylesheet" type="text/css" href="../css/userwindow.css" />
+		<link rel="stylesheet" type="text/css" href="../css/chosen.css">
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/content/bootstrap.min.css">
+   		<link href="../css/content/bootstrap-theme.min.css" rel="stylesheet" />
+		<script src="../js/resources/jquery-1.12.3.min.js"></script>
+		<script src="../js/resources/bootstrap.min.js"></script>	
+		<script src="../js/resources/modernizr.custom.js"></script>
+		<script src="../js/resources/XSockets.latest.min.js"></script>
+		<script src="../js/resources/classie.js"></script>	
+		<script src="../js/chosen.jquery.js" type="text/javascript"></script>
+		<script src="../js/resources/chart.js"></script>
+		<script src="../js/resources/knockout-3.4.0.js"></script>		
+	</head>
+	
+	<body class="cbp-spmenu-push">
+						
+		<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+			<div id="chat-container" class="right-container">
+				<div class="public-chat-panel">
+					<div class="panel-top">
+						Public
+					</div>			
+					<div class="chat-panel">
+						<div class="panel-body msg_container_base" id="publicMessageContainer">
+							
+						</div>
+						<div class="chatbox" style="position: relative;">
+								<textarea name="chatarea"  id="chatcontent" placeholder="Write your message here..."></textarea>
+								<button type="button"  class="b btn btn-xs"><i class=" fa fa-paperclip"></i></button>
+								<button type="button"  id="publicSend" class="b1 btn btn-xs" >Send</button>
+						</div>
+						
+					</div>
+				</div>
+				<div class="private-chat-panel">	
+					<div class="panel-top">
+						Private
+					</div>
+					<div class="private-chat-username-selection">
+						<div style="float:left; font-size: 10px; margin-top: 5px; margin-left:20px; margin-right:20px;">To </div>
+						<div style="bottom:2px; font-size: 10px;">
+							<select data-placeholder="Choose a user.." style="width:80%;" multiple class="chosen-select" tabindex="2">
+								<option value=""></option>
+					            <option value="Pengzhi">Pengzhi</option>
+					            <option value="David">David</option>
+					            <option value="Sicheng">Sicheng</option>
+					            <option selected>Marlin</option>
+					            <option disabled>Hedda</option>
+					            <option selected>Tinashe</option>
+					            <option disabled>Venkesh</option>
+							</select>
+						</div>			
+					</div>
+					<div class="subprivate-chat-panel">
+						<div class="panel-body msg_container_base">
+						</div>
+						<div class="chatbox" style="position: relative;">
+								<textarea name="chatarea"  id="chatcontent"  placeholder="Write your message here..."></textarea>
+								<button type="button"  class="b btn btn-xs"><i class=" fa fa-paperclip"></i></button>
+								<button type="button"  class="b1 btn btn-xs" >Send</button>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			<div id="poll-container" class="right-container" style="background-color:#fff;">
+				<div class="poll-panel-top hidden" id="answerPollPanel">
+					<div class="panel-top">
+						Answer poll
+					</div>
+					<div class="panel-center" style="height: 90%;">
+						<div class="answer-poll-container" style="color: gray;">
+							<div style="margin-top: 50px; margin-bottom: 50px;">
+								<i>What do you think about....? </i>
+							</div>
+							<div id="pollBtnAnswers" style="margin-top: 20px;">
+									<button class="poll-button btn btn-xs btn-yes" title="Yes">Yes</button>
+									<button class="poll-button btn btn-xs btn-no" title="No">No</button>
+									<button class="poll-button btn btn-xs btn-netural" title="Neutral">Neutral</button>
+							</div>
+
+							<div style="position: absolute; bottom: 20px; left: 42%;">
+							<button type="button" id="sendPollResult" class="btn poll_create_btn">Send</button>	
+							</div>							
+							
+						</div>
+					</div>
+				</div>
+				<div class="poll-panel-top hidden" id="resultPollPanel">
+					<div class="panel-top">
+						Result
+					</div>
+					<div class="panel-center" style="height: 90%;">
+						<div class="answer-poll-container" style="color: gray;">
+							<div style="margin-top: 50px; margin-bottom: 20px;">
+								<i>What do you think about....? </i>
+							</div>
+							<div id="resultsContainer" style="margin-top: 20px;">
+								<canvas id="resultsChart"></canvas>
+							</div>
+							<!--<button type="button" id="saveResultToPng"class="btn btn-sm poll_save_result_btn">Save</button>	-->
+							<div class="save-button-div" style="text-align:center; margin-bottom: 10px; font-size: 10px;">
+								<a href="#" class="btn btn-lg poll_save_result_btn" id="btn-download">Save</a>		
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				<div class="poll-panel-bottom">
+					<div class="panel-top" id="createpollExpand">
+						Create a poll
+					</div>
+					<div id="createPollQuestionContainer" class="panel-center" style="height: 90%;">
+						<div class="create-poll-container" style="color: gray;">
+							<div>1. Add your question
+								<textarea  id="poll-question" style="margin-top: 20px; width:90%;"></textarea>
+							</div>
+							<div style="margin-top: 30px;">2. Answering alternatives
+								<div id="poll_btn_answers" style="margin-top: 20px;">
+									<button class="poll-button btn btn-xs btn-yes" title="Yes">Yes<i class="fa fa-times fa-lg close" aria-hidden="true"></i>
+    								</button>
+									<button class="poll-button btn btn-xs btn-no" title="No">No<i class="fa fa-times fa-lg close" aria-hidden="true"></i></button>
+									<button class="poll-button btn btn-xs btn-netural" title="Neutral">Neutral<i class="fa fa-times fa-lg close" aria-hidden="true"></i></button>
+								</div>
+							</div>
+
+							<div id ="poll_add_choices" style="margin-top: 20px;">
+								<input type="text" id="addition_poll_answer" value="" width="50%" /> <i class="fa fa-plus fa-lg" id="create_poll_answer" aria-hidden="true"></i>
+							</div>
+							
+							<button id="pollCreateButton" type="button" class="btn poll_create_btn" style="margin-top: 40px;" >Create</button>								
+							
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="shared-container" class="right-container">
+				<div class="share-files-panel">
+					<div class="panel-top">
+						Shared files
+					</div>			
+					<div class="panel-center" style="height: 90%; position: relative;">
+						<div class="scrollable-div">
+						 <ul id="otherSharedFiles">
+      						<li>
+					        <div class="col">File 1</div>
+					        <div class="small"><input type="radio" value="one" name="1"/></div>
+					      	</li>
+
+					      	
+					     </ul>
+					 	</div>
+
+					 	<div class="download-buttons">
+					 	<button class="btn btn-sm download-btn">Download</button>
+					 	<button class="btn btn-sm download-btn">Download All</button>
+					 	</div>
+					</div>
+				</div>
+				<div class="shared-recording-panel">	
+					<div class="panel-top">
+						Shared Recordings
+					</div>
+					<div class="panel-center" style="height: 90%;">
+						<div class="scrollable-div">
+						 <ul id="recordingFiles">
+      						<li>
+					        <div class="col"><a>File 1</a></div>
+					        <div class="small"><input type="radio" value="one" name="1"/></div>
+					      	</li>
+
+					     </ul>
+					 	</div>
+
+					 	<div class="download-buttons">
+					 	<button class="btn btn-sm download-btn">Download</button>
+					 	<button class="btn btn-sm download-btn">Download All</button>
+					 	</div>
+					</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="settings-container" class="right-container">
+				<div class="setting-panel">
+					<div class="panel-top-s">
+						Settings
+					</div>			
+					<div class="panel-center">		
+						<div class="settings-change-container" style="color: gray;">
+							<div style="margin-left: 20px;">Change user name<i id="change-username-container-expand" style="float:right; margin-right:10px; cursor:pointer;" class="fa fa-angle-down fa-lg" aria-hidden="true"></i>
+							</div>
+							<div id="change-username-container" class="hide-container" style="text-align:center">
+								<div>
+								<input type="text" value="" id="username_newvalue" style="margin-top: 20px; width:50%;"/>
+								</div>
+								<button type="button"  id="changeUserName" class="settings-btn btn btn-xs" >Save</button>								
+							</div>
+						</div>
+						<div class="settings-change-container" style="color: gray;">
+							<div style="margin-left: 20px;">Change group name<i id="change-groupname-container-expand" style="float:right; margin-right:10px; cursor:pointer;" class="fa fa-angle-down fa-lg" aria-hidden="true"></i>
+							</div>
+							<div id="change-groupname-container" class="hide-container" style="text-align:center">
+								<div>
+								<input type="text" value="" id="groupname_newvalue" style="margin-top: 20px; width:50%;"/>
+								</div>
+								<button type="button"  class="settings-btn btn btn-xs" >Save</button>								
+							</div>
+						</div>
+						<div class="settings-change-container" style="color: gray;">
+							<div style="margin-left: 20px;">Change transribe language<i id="change-language-container-expand" style="float:right; margin-right:10px; cursor:pointer;" class="fa fa-angle-down fa-lg" aria-hidden="true"></i>
+							</div>
+							<div id="change-transribe-language-container" class="hide-container" style="text-align:center">
+								<div style="margin-top: 10px;">
+									<span class="language">
+						              <select name="lang" id="lang" onchange="updateLang(this)">
+						                <option value="af-ZA">Afrikaans</option>
+						                <option value="ja-JP">日本語</option>
+						              </select>
+						            </span>
+								</div>
+								<button type="button"  class="settings-btn btn btn-xs" >Save</button>								
+							</div>
+						</div>
+					</div>
+				</div>	
+			</div>
+		</nav>
+
+
+		<div id="openModal" class="modalDialog">
+			<div class="host">
+				<a href="#close" title="Close" class="close">X</a>
+				<h2 style="color: #FF6B47;">Hey You!</h2>
+				<div class="leftpanel">
+					<div>
+						<b>Group name</b>
+						<p style="font-size: 12px;">This will appear on the video feed</p>
+						<input type="text" value="" size="30%" id="hostGroupName" placeholder="Company, department, location etc" />
+					</div>
+					<div style="margin-top: 10px;">
+						<b>Personal name</b>
+						<p style="font-size: 12px;">This will enable private message (queue also)</p>
+						<input type="text" value="" id="hostPersonalName" size="30%" />
+					</div>
+				</div>
+				<div class="rightpanel">
+					<div>
+						<p><b>Activate Recording</b> <img src="../images/record-black.png" width="20px" height="20px"/></p>
+						<p style="color:#BABCBD; font-size: 11px;"><i>Activate the function to be able to record, save and download transcribed hightlights of the meeting
+						</i></p>
+						<button  id="activateRecording" type="button" style="margin-top: 10px;" class="btn btn-color-record-activate btn-sm">Activate</button>
+						 <ul id="reservefiles"> </ul>
+					</div>
+
+				</div>
+				<button type="button" class="submithost" id="submitHostInfo" >Submit</button>
+			</div>
+			
+			<div class="participants">
+				<a href="#close" title="Close" class="close">X</a>
+				<h2 style="color: #FF6B47;">Hey You!</h2>
+				<div class="centerpanel">
+					<div>
+						<b>Choose group name</b>
+						<p style="font-size: 12px;">This will appear on the video feed</p>
+						<div class="select-style" style="text-align: center;">
+						  <select id="participantsGroupName">
+						    <option value="volvo">Volvo</option>
+						    <option value="saab">Saab</option>
+						    <option value="mercedes">Mercedes</option>
+						    <option value="audi">Audi</option>
+						  </select>
+						</div>
+					</div>
+					<div style="margin-top: 10px;">
+						<b>Personal name</b>
+						<p style="font-size: 12px;">This will enable private message (queue also)</p>
+						<input type="text" value="" size="30" id="participantPersonalName" />
+					</div>
+				</div>
+				
+				<button type="button" class="submitparticipants" id="submitParticipantInfo">Submit</button>
+			</div>
+
+		</div>
+
+
+		<div class= "mycontainer">
+			
+			<div class="panel-right-controles">
+				<div id="chat-right-menu" class="chat-right-control right-control-gray-color">
+					<div class="icon-in-right-control">
+						<img  src="../images/chat_black.png" alt="some_text" title="chat" />
+					</div>
+					<div class="text-in-right-control">
+						Chat
+					</div>
+	        	</div>
+
+	        	<div id="poll-right-menu" class="poll-right-control right-control-gray-color">
+					<div class="icon-in-right-control">
+						<img  src="../images/poll.png" alt="some_text" title="poll" />
+					</div>
+					<div class="text-in-right-control">
+						Poll
+					</div>
+	        	</div>
+
+	        	<div id="shared-right-menu" class="shared-right-control right-control-gray-color">
+					<div class="icon-in-right-control">
+						<img  src="../images/shared_files.png" alt="some_text" title="shared" />
+					</div>
+					<div class="text-in-right-control">
+						Shared
+					</div>
+					<div class="text-1-in-right-control">
+						Files
+					</div>
+	        	</div>
+
+	        	<div id="settings-right-menu" class="settings-right-control right-control-gray-color">
+					<div class="icon-in-right-control">
+						<img  src="../images/settings_icon.png" alt="some_text" title="settings" />
+					</div>
+					<div class="text-in-right-control">
+						Settings
+					</div>
+
+	        	</div>
+			</div>
+			<div class="ccontainer">
+				<header>
+					<span style="float:left;"><img src="../images/mute_white.png" class="mute-button" id="muteBtn" rel="0"/></span>
+					<div id="queuewrap"  class="queue-wrap" data-bind="visible: Queues().length>0">
+						<!-- ko if: Queues().length > 0-->
+						<div style="float:left;"><img src="../images/engage_black_queue.png"/></div>
+						<div class="raise-question-queue" id="questionQueue" data-bind="foreach:Queues">
+							<div class="circleBase outer-circle" data-bind="style: {background: BackgroundColor }">
+	                            <div class="circleBase inner-circle" style="float:left;" data-bind="text: Name, attr: {title: Question }" >
+	                    
+	                            </div>
+	                        </div>
+						</div>
+						<!-- /ko -->​
+
+					</div>
+				</header>
+
+				<div class="row center-section col-centered">
+					<div class="col-sm-4" id="rasie-question">
+						<div class="mainmenu">
+						<img  src="../images/raise-2.png" alt="some_text" title="raise question" / >	
+						</div>			
+					</div>
+
+					<div class="col-sm-4 hidden" id="expand-rasie-question">
+						<div class="banner">
+							<div class="banner-header">
+								<img id="close-raise-banner" src="../images/close2.png" class="header-close-img">
+								<img src="../images/engage_black.png" class="header-img" alt="some_text" title="raise" />
+								Speak
+							</div>
+							<div class="banner-body">
+								<textarea id="question-content" class="form-control" style="min-width: 100%; min-height:100%; color: #47a3da;" placeholder="Write your question here..."></textarea>
+							</div>
+
+							<div>
+								<div style="margin-top:30px; color: #fff;">
+									Request to speak
+								</div>
+								<div>
+									<img src="../images/check-1.png" class="footer-img" id="submitQuestion" rel="add" title="raise" />
+								</div>
+							</div>
+						</div>			
+					</div>
+
+					<div class="col-sm-4" id="morderator">						
+						<div id="recording" >	
+							<div class="mainmenu">				
+								<img  src="../images/tag_white_1.png" alt="some_text" title="Record" />
+							</div>
+						</div>
+						
+						<div class="hidden" id="expand-recording">
+							<div class="banner">
+								<div class="banner-header">
+									<img id="close-tag-banner" src="../images/close2.png" class="header-close-img">
+									<img src="../images/tag_black_1.png" class="header-img" alt="some_text" title="raise" />
+									Tag Recording
+								</div>
+
+								<div id="enableTag" class="banner-tag-body-1 hidden">
+									<div style='color:#fff; margin-top: 20px;'>
+										ENABLE RECORDING
+									</div>
+									<div style='color:#fff; font-style: italic; margin-top: 30px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;'>
+										By enable recordings all sites will be recordinged, 
+										this function allow everyone to tag important information
+										in the recording
+									</div>
+									<button id="enableRecording" type="button" class="btn save_tag_btn" style="margin-top: 50px;">Enable</button>	
+								</div>
+
+								<div id="bannerTagbody" class="banner-tag-body">
+									<div id="earilerTags" class="hidden" style="font-size: 10px; float:right; color: #F5F6F8; cursor:pointer; padding-right: 10px;">
+										<div style="float:left">Earlier Tags</div>
+										<div id="earilerTagsNumber" style="float:left; padding-left: 2px;"></div>
+									</div>
+
+									<div id="tagCenterImage" class="tag-center-image">
+											<div style="color:#F5F6F8; margin-bottom:10px;">Tag this moment</div>
+											<img id="tagButton" style="cursor:pointer;"src="../images/tag_white_2.png" alt="some_text" title="tag" />
+									</div>
+
+									<div id="tagContent" class="tag-content hidden">
+										<textarea id="tagContentArea" class="form-control" style="min-width: 100%; min-height:100px; color: #47a3da; text-align:left;" placeholder="Add tag description"></textarea>
+
+										<button id="saveTag" type="button" class="btn save_tag_btn" style="margin-top: 50px;">Save tag</button>	
+									</div>
+
+									<div id="saveTagContent" class="save-tag-content hidden">
+										<div style="margin-top:5px;">Save File</div>
+										<div style="width:80%; margin: auto;">
+											<div id="numberOfTags" style="float:right; font-size:7px; color:#000">
+												<div style="float:left">number of tags</div>
+												<div id="numberOfT" style="float:left; padding-left: 2px;"></div>
+											</div>
+											<div style="clear: both; margin-top: 10px;">
+												<input type="text" id="tagRecordName" style="width:100%;"></input>
+											</div>
+										</div>
+										<div style="width: 100%; height: 20%; bottom:0; position: absolute; color:#fff;">
+											<div id="cancelTagsButton" style="display: inline-block; float:left;width: 50%; cursor:pointer; height: 100%;background-color: #545454">Cancel</div>
+											<div id="saveTagsButton" style="display: inline-block; float:left;width: 50%; height: 100%; cursor:pointer; background-color: #26C689">Save</div>
+										</div>
+									</div>
+								</div>
+
+								<div id="bannerFooter" class="banner-footer">
+									<div id="stopRecordingButton" style="color: #fff; height:50%; background-color: #F23647; cursor:pointer;">
+										Stop recording	
+									</div>
+									<div id="saveAllTags" style="color: #fff; height:50%; background-color: #676D82;">
+										Save all tags
+									</div>
+								</div>
+							</div>	
+						</div>
+					</div>
+
+					<div class="col-sm-4" id="participants">
+						<div id="polling" >	
+							<div class="mainmenu">				
+								<img  src="../images/poll_white-1.png" alt="some_text" title="polling" />
+							</div>
+						</div>
+						
+						<div class="hidden" id="expand-polling">
+							<div class="banner">
+								<div class="banner-header">
+									<img id="close-polling-banner" src="../images/close2.png" class="header-close-img">
+									<img src="../images/poll_black.png" class="header-img" alt="some_text" title="poll" />
+									Poll
+								</div>
+								<div id="participantCreatePoll" style="height: 82%;">
+			
+									<div class="create-poll-container" style="height: 85%; background-color: #fff; color: gray; margin-top: 40px;">
+										<div>1. Add your question
+											<textarea  id="participant-poll-question" style="margin-top: 20px; width:90%;"></textarea>
+										</div>
+										<div style="margin-top: 20px;">2. Answering alternatives
+											<div id="participant_poll_btn_answers" style="margin-top: 20px;">
+												<button class="poll-button btn btn-xs btn-yes" title="Yes">Yes<i class="fa fa-times fa-lg close" aria-hidden="true"></i>
+			    								</button>
+												<button class="poll-button btn btn-xs btn-no" title="No">No<i class="fa fa-times fa-lg close" aria-hidden="true"></i></button>
+												<button class="poll-button btn btn-xs btn-netural" title="Neutral">Neutral<i class="fa fa-times fa-lg close" aria-hidden="true"></i></button>
+											</div>
+										</div>
+
+										<div id ="participant_poll_add_choices" style="margin-top: 20px;">
+											<input type="text" id="participant_addition_poll_answer" value="" width="50%" /> <i class="fa fa-plus fa-lg" id="participant_create_poll_answer" aria-hidden="true"></i>
+										</div>
+																						
+									</div>
+									<button id="participantsPollCreateButton" type="button" class="btn poll_create_btn" style="margin-top: 20px;">Create</button>	
+									<!--
+									<div class="save-button-div" style="text-align:center; margin-bottom: 10px; font-size: 10px;">
+										<a href="#" class="btn btn-lg poll_save_result_btn" id="btn-download">Save</a>		
+									</div>
+									-->								
+								</div>
+
+								<div id="participantAnswerPoll" class="hidden" style="height: 82%;">
+			
+									<div class="create-poll-container" style="height: 85%; background-color: #fff; color: gray; margin-top: 40px;">
+										<div>
+										Answer poll
+										</div>
+										<div class="panel-center" style="height: 90%;">
+											<div class="answer-poll-container" style="color: gray;">
+												<div style="margin-top: 50px; margin-bottom: 50px;">
+													<i>What do you think about....? </i>
+												</div>
+												<div id="pollBtnAnswers" style="margin-top: 20px;">
+														<button class="poll-button btn btn-xs btn-yes" title="Yes">Yes</button>
+														<button class="poll-button btn btn-xs btn-no" title="No">No</button>
+														<button class="poll-button btn btn-xs btn-netural" title="Neutral">Neutral</button>
+												</div>
+							
+											</div>
+										</div>
+																						
+									</div>
+	
+									<button type="button" id="participantSendPollResult" class="btn poll_create_btn" style="margin-top: 20px;">Send</button>	
+									<!--
+									<div class="save-button-div" style="text-align:center; margin-bottom: 10px; font-size: 10px;">
+										<a href="#" class="btn btn-lg poll_save_result_btn" id="btn-download">Save</a>		
+									</div>
+									-->								
+								</div>
+
+								<div id="participantResultPoll" class="hidden" style="height: 82%;">
+			
+									<div class="create-poll-container" style="height: 85%; background-color: #fff; color: gray; margin-top: 40px;">
+										<div>
+										Result
+										</div>
+										<div class="panel-center" style="height: 90%;">
+											<div class="answer-poll-container" style="color: gray;">
+												<div style="margin-top: 20px;">
+													<i>What do you think about....? </i>
+												</div>
+												<div id="resultsContainer" style="margin-top: 20px;">
+
+													<canvas id="resultsChart1"></canvas>
+												</div>
+												<!--<button type="button" id="saveResultToPng"class="btn btn-sm poll_save_result_btn">Save</button>	-->
+																	
+											</div>
+										</div>
+																						
+									</div>
+	
+									<button type="button" id="participantSendPollResult" class="btn poll_create_btn" style="margin-top: 20px;">Save</button>
+									<!--
+									<div class="save-button-div" style="text-align:center; margin-bottom: 10px; font-size: 10px;">
+										<a href="#" class="btn btn-lg poll_save_result_btn" id="btn-download">Save</a>		
+									</div>
+									-->								
+								</div>
+							
+							</div>	
+							
+						</div>
+					</div>
+
+					<div class="col-sm-4 ">
+						<div id="shareScreen" class="mainmenu">
+							<img  src="../images/share_screen_1.png" alt="some_text" />
+						</div>
+
+					</div>
+				</div>	
+
+				<div id="footer" class="footer">
+					<div class="alter-agenda-button-container" id="expandAlterAgendaContainer"> 
+						Alter agenda <i style="float:right; margin-right:10px; cursor:pointer;" class="fa fa-angle-up fa-lg" aria-hidden="true"></i>
+					</div>
+
+					<div id="alterAgendaContainer" class="alter-agenda-container hidden">
+						<div class="alter-agenda-container-title">
+							Alter agenda <i id="closeAlterAgendaContainer" style="float:right; margin-right:10px; cursor:pointer;" class="fa fa-angle-down fa-lg" aria-hidden="true"></i>
+						</div>
+						<div class="alter-agenda-container-content">
+							<div id="alterAgenda" data-bind="foreach:Agendas">
+								<div id="test-sub"  data-bind="foreach: Topics">
+			                        <div class="col-md-4" style="margin-top:10px;">
+			                        	<div class="mark-circle circleBase" data-bind="style: { background : $index() == $parent.Highlight()?  '#FF6633' : '' }, attr: {'id': $index()}"></div>
+			                        	<div style="float:left; margin-left: 10px;"><input type="text" class="input-box" data-bind="value: $data"></input>
+			                        	</div>
+			                        </div>
+			                    </div>
+							</div>
+						</div>
+					</div>
+				</div>	
+
+			</div>
+		</div>
+
+		 <script type="text/javascript">
+		    var config = {
+		      '.chosen-select'           : {},
+		      '.chosen-select-deselect'  : {allow_single_deselect:true},
+		      '.chosen-select-no-single' : {disable_search_threshold:10},
+		      '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+		      '.chosen-select-width'     : {width:"95%"}
+		    }
+		    for (var selector in config) {
+		      $(selector).chosen(config[selector]);
+		    }
+		  </script>
+
+
+		 <!-- My model, service, controller, view and app -->
+	    <script src="../js/model/queueViewModel.js"></script>
+	    <script src="../js/service/queueService.js"></script>
+	    <script src="../js/controller/queueController.js"></script>
+	    <script src="../js/view/queueView.js"></script>
+		<script src="../js/model/agendaViewModel.js"></script>
+		<script src="../js/service/agendaService.js"></script>
+		<script src="../js/controller/agendaController.js"></script>
+		<script src="../js/view/agendaView.js"></script>
+
+	    <script src="../js/myApp.js"></script>
+		<script src="../js/main.js"></script>		
+	</body>
+</html>

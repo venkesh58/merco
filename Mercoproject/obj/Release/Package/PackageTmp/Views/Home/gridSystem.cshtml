@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<title>MERCO</title>
+		<meta name="description" content="Video conference websites for merco project" />
+		<meta name="keywords" content="merco, video confernce" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/content/bootstrap.min.css">
+		<link rel="stylesheet" href="css/gridsystem.css">
+		<script src="js/resources/jquery-1.12.3.min.js"></script>
+		<script src="js/resources/bootstrap.min.js"></script>	
+		<script src="https://cdn.WebRTC-Experiment.com/getScreenId.js"></script>
+	</head>
+	<body>
+
+		<div class="topdiv">
+			<div class="progressbar_agenda_div">
+				<div class="progressBar"><div></div></div>
+				<div  id="alterAgenda" class="agenda_topics" data-bind="foreach:Agendas">
+					<div id="test-sub" class="inside_agenda" data-bind="foreach: Topics">
+                        <div class="topic" data-bind="text: $data, style: { width: calcWidth(childItems().length),
+                        background : $index() == $parent.Highlight()?  '#FCCC33' : '#DFDFE0' }">
+                        </div>
+                    </div>
+				</div>
+				<div  id="alterAgenda" class="agenda_extra_spaces" data-bind="foreach:Agendas">
+					<div id="test-sub" class="inside_agenda1" data-bind="foreach: Topics">
+                        <div class="extra_space" data-bind="style: { width: calcWidth(childItems().length),
+                        background : $index() == $parent.Highlight()?  '#FCCC33' : '#070E43' }">
+                        </div>
+                    </div>
+				</div>			
+			</div>
+			<div id="clockdiv" class="top_clock_div">
+			  	<div style="float: left;">
+			    <span class="hours"></span>
+			 	</div>
+			  	<div style="float: left;">
+			    <span class="minutes"></span>
+			  	</div>
+			  	<div style="float: left;">
+			    <span class="seconds"></span>
+			 	</div>
+			</div>
+		</div>
+		<div class="wrap">	
+			<div class="uplayout" style="border:0;">
+				<div class="row videospeaking" id="videospeaking">
+				</div>
+			</div>
+			<div class="rightlayout" style="display:none;">
+				<div class="row" id="videoscreenright">
+				</div>
+			</div>
+			<div class="belowlayout">
+				<div class="row" id="videoscreen" style="margin-top:10px;">
+				</div>
+			</div>
+		</div>
+
+		<script>
+		calcWidth = function(amt) {
+		  return $('.progressBar').width()/amt + 'px';
+		}
+		</script>	 
+		<script src="js/resources/XSockets.latest.min.js"></script>
+		<script src="js/XSockets.WebRTC.latest.js"></script>
+		<script src="js/resources/knockout-3.4.0.js"></script>
+		 <!-- My model, service, controller, view and app -->
+		<script src="js/model/agendaViewModel.js"></script>
+		<script src="js/service/agendaService.js"></script>
+		<script src="js/controller/agendaController.js"></script>
+		<script src="js/view/agendaView.js"></script>
+		<script src="js/gridsystem.js"></script>
+	</body>
+</html>
